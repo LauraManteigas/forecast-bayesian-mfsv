@@ -1,3 +1,16 @@
+#' Interactive Convergence Diagnostics Menu
+#'
+#' Provides an interactive text-based menu to visualize convergence diagnostics 
+#' for the MFSV model's log-determinant series from the best and worst parameter sets.
+#'
+#' The user can choose between:
+#' - Trace plot of the log determinant.
+#' - Autocorrelation function (ACF) of the log determinant.
+#'
+#' @details The function runs in a `repeat` loop until the user selects 'E' to exit.
+#' It assumes that `fsv_results` is a globally available object with `$best` and `$worst` results.
+#'
+#' @return No return value. Plots are generated based on user input.
 check_convergence <- function() {
   repeat {
     cat("\nWhich plot (Best VERSUS Worst) do you want to see?\n")
@@ -25,6 +38,22 @@ check_convergence <- function() {
   }
 }
 
+
+#' Interactive Forecast Diagnostics Menu
+#'
+#' Provides an interactive text-based menu to visualize model diagnostics 
+#' comparing best and worst parameter sets in terms of forecasts and volatility estimates.
+#'
+#' The user can choose between:
+#' - Pairwise posterior plots of factor loadings.
+#' - Series-specific volatilities over time.
+#' - Log-variances over time.
+#' - Real vs Predicted values with forecast intervals.
+#'
+#' @details The function runs in a `repeat` loop until the user selects 'E' to exit.
+#' It assumes that `fsv_results` and `prediction_results` are globally available objects.
+#'
+#' @return No return value. Plots are generated based on user input.
 plot_test <- function() {
   repeat {
     cat("\nWhich plot (Best VERSUS Worst) do you want to see?\n")
