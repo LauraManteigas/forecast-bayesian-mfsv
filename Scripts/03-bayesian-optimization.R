@@ -68,8 +68,8 @@ objective_function <- function(B_mu, a_0, b_0, B_sigma, a_i, c, d) {
 #' re-running.
 run_bayesian_optimization <- function(
     search_space, 
-    initPoints = p + 1, 
-    iters.n = 1, 
+    initPoints = 70, 
+    iters.n = 50, 
     file_path = "Results/bayesian_optimization.csv") {
   
   if (file.exists(file_path)) {
