@@ -12,6 +12,18 @@ The framework fine-tunes hyperparameters using an objective function based on Hi
 
 
 ## Project Structure
+```bash
+├── dir1
+│   ├── file11.ext
+│   └── file12.ext
+├── dir2
+│   ├── file21.ext
+│   ├── file22.ext
+│   └── file23.ext
+├── dir3
+├── file_in_root.ext
+└── README.md
+```bash
 main.R                      # Main workflow script  
 Data/                       # Input data files (CSV format)  
 Results/                    # Model outputs and diagnostics  
