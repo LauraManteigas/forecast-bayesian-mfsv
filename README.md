@@ -32,4 +32,7 @@ The framework fine-tunes hyperparameters using an objective function based on Hi
 ## Notes
 + Hyperparameters, forecast horizon, and model settings can be adjusted in `Scripts/config.R`.
 + The random seed is fixed for reproducibility.
-+ The folder Results/ contains the forecast outputs. If results files already exist, the scripts will load them automatically. If not, the model will generate and save them into this folder during execution. Do not delete the Results/ folder, even if it is currently empty. Similarly for Results/MFSV.
++ The `Results/` folder contains the forecast outputs.
+  + If result files already exist, the scripts will load them automatically.
+  + If not, the model will generate and save them into this folder during execution.
++ Do not delete the `Results/` folder, even if it is currently empty. The same applies to `Results/MFSV/`.
