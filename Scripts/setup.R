@@ -31,5 +31,5 @@ source_scripts(c(
   "Scripts/02-mfsv.R",
   "Scripts/03-bayesian-optimization.R",
   "Scripts/04-save-results.R",
-  "Scripts/mfsv-visualization.R"
+  "Scripts/05-mfsv-visualization.R"
 ))
