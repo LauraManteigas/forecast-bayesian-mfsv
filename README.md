@@ -35,4 +35,4 @@ The framework fine-tunes hyperparameters using an objective function based on Hi
 + The `Results/` folder contains the forecast outputs.
   + If result files already exist, the scripts will load them automatically.
   + If not, the model will generate and save them into this folder during execution.
-+ Do not delete the `Results/` folder, even if it is currently empty. The same applies to `Results/MFSV/`.
++ The `Results/` directory is created after the first run of the code. The same applies to `Results/MFSV/`.
