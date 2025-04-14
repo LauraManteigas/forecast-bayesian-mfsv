@@ -71,7 +71,8 @@ run_bayesian_optimization <- function(
     initPoints = 70, 
     iters.n = 50, 
     file_path = "Results/bayesian_optimization.csv") {
-  
+
+  dir.create("Results", showWarnings = FALSE, recursive = TRUE)  
   if (file.exists(file_path)) {
     cat("Bayesian optimization results found. Loading from file...\n")
     return(fread(file_path))
