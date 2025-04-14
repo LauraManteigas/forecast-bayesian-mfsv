@@ -1,7 +1,7 @@
 config <- list(
   symbols = c("Brent", "Dubai", "Gasoline", "HO", "WTI"),
   data_path = "Data/",
-  mcmc = list(q = 2, draws = 150000, burnin = 50000, thin = 1),
+  mcmc = list(q = 2, draws = 1e5, burnin = 5e4, thin = 1),
   prediction = list(steps = 50, alpha = 0.05, smax = sqrt(qchisq(0.95, df = 5))),
   weights = list(wc = 0.7, ws = 0.3),
   search_space = list(
