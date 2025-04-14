@@ -60,11 +60,15 @@ compute_fsv <- function(params) {
 #' Computes predictions using the FSV data and compares predicted versus real 
 #' values.
 #' 
-#' @param steps Number of steps to predict.
+#' @param steps Number of steps to predict. Defaults to `config$prediction$steps`.
 #' @param fsv_data Data resulting from the `compute_fsv` function.
 #' @return A list containing `pred_draws` and `real_and_hdi` (comparison of 
 #' predictions and real values).
 compute_predictions_wrapper <- function(steps, fsv_data) {
+  if (is.null(steps)) {
+    steps <- config$prediction$steps
+  }
+  
   pred_draws <- compute_predictions(steps, fsv_data)
   real_and_hdi <- compare_predicted_real(data, pred_draws)
   
@@ -81,6 +85,6 @@ compute_predictions_wrapper <- function(steps, fsv_data) {
 #' exist.
 #' @param ... Additional arguments passed to `load_or_compute`.
 #' @return The result of the `load_or_compute` function.
-load_or_compute_wrapper <- function(path, compute_function, ...) {
+load_or_compute_wrapper <- function(path, compute_function = compute_predictions_wrapper, ...) {
   load_or_compute(path, compute_function, ...)
 }
