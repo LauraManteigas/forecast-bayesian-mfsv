@@ -8,9 +8,9 @@
 #' @return A list of computed data if the file doesn't exist, or loaded data 
 #' from the file if it does.
 load_or_compute <- function(file_path, compute_func, ...) {
-  dir.create("Results", showWarnings = FALSE, recursive = TRUE)
-  if (!grepl("^Results/", file_path)) {
-    file_path <- file.path("Results", file_path)
+  dir.create("Results/MFSV", showWarnings = FALSE, recursive = TRUE)
+  if (!grepl("^Results/MFSV/", file_path)) {
+    file_path <- file.path("Results/MFSV", file_path)
   }
   
   if (file.exists(file_path)) {
