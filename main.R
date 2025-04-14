@@ -48,14 +48,10 @@ check_convergence()
 prediction_results <- list(
   best = load_or_compute_wrapper(
     "Results/MFSV/predictions_best.RData",
-    compute_predictions_wrapper,
-    config$prediction$steps,
     fsv_results$best$fsv_data
     ),
   worst = load_or_compute_wrapper(
     "Results/MFSV/predictions_worst.RData",
-    compute_predictions_wrapper,
-    config$prediction$steps,
     fsv_results$worst$fsv_data)
 )
 
