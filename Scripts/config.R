@@ -5,13 +5,13 @@ config <- list(
   prediction = list(steps = 50, alpha = 0.05, smax = sqrt(qchisq(0.95, df = 5))),
   weights = list(wc = 0.7, ws = 0.3),
   search_space = list(
-    B_mu = c(1, 200),  
-    a_0 = c(1, 100),  
-    b_0 = c(1, 100),
+    B_mu = c(1, 150),  
+    a_0 = c(1, 50),  
+    b_0 = c(1, 50),
     B_sigma = c(0.01, 1),
-    a_i = c(0.1, 0.9),
-    c = c(0.5, 15),
-    d = c(0.5, 15)
+    a_i = c(0.1, 5),
+    c = c(0.1, 10),
+    d = c(0.1, 10)
   )
 )
 
