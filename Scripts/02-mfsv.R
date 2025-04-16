@@ -103,15 +103,13 @@ compute_predictions <- function(days_ahead, fsv_sample) {
 calculate_hdi_intervals <- function(data, pred_draws_data) {
   test_dates <- data[stage == "test", date]
   num_days <- config$prediction$steps
-  
-  # Preallocate vectors
+
   total <- num_days * m
   lower <- numeric(total)
   upper <- numeric(total)
   series <- rep(factor(config$symbols), times = num_days)
   date <- rep(test_dates, each = m)
   
-  # Faster HDI inlined (avoids calling get_hdi repeatedly)
   idx <- 1
   for (day in seq_len(num_days)) {
     mat <- pred_draws_data[[day]]
@@ -128,8 +126,7 @@ calculate_hdi_intervals <- function(data, pred_draws_data) {
       idx <- idx + 1
     }
   }
-  
-  # Build final data.table in one go
+
   data.table(
     date = date,
     series = series,
