@@ -101,25 +101,40 @@ compute_predictions <- function(days_ahead, fsv_sample) {
 #' @param pred_draws_data List of predictive draws from `compute_predictions`
 #' @return A `data.table` with HDI bounds, series, and associated dates
 calculate_hdi_intervals <- function(data, pred_draws_data) {
-  n_days <- length(pred_draws_data)
-  n_series <- ncol(pred_draws_data[[1]])
   test_dates <- data[stage == "test", date]
-  series_names <- rep(config$symbols, times = n_days)
+  num_days <- config$prediction$steps
   
-  big_mat <- do.call(cbind, pred_draws_data)
-  big_mat_t <- t(big_mat)
+  # Preallocate vectors
+  total <- num_days * m
+  lower <- numeric(total)
+  upper <- numeric(total)
+  series <- rep(factor(config$symbols), times = num_days)
+  date <- rep(test_dates, each = m)
   
-  hdi_list <- lapply(seq_len(ncol(big_mat_t)), function(i) {
-    ci(big_mat_t[, i], method = "HDI")
-  })
-  lower <- vapply(hdi_list, function(x) x$CI_low, numeric(1))
-  upper <- vapply(hdi_list, function(x) x$CI_high, numeric(1))
+  # Faster HDI inlined (avoids calling get_hdi repeatedly)
+  idx <- 1
+  for (day in seq_len(num_days)) {
+    mat <- pred_draws_data[[day]]
+    for (j in seq_len(m)) {
+      x <- mat[, j]
+      n <- length(x)
+      sorted_x <- sort(x)
+      interval_idx <- floor(0.95 * n)
+      n_intervals <- n - interval_idx
+      widths <- sorted_x[(interval_idx + 1):n] - sorted_x[1:n_intervals]
+      min_idx <- which.min(widths)
+      lower[idx] <- sorted_x[min_idx]
+      upper[idx] <- sorted_x[min_idx + interval_idx]
+      idx <- idx + 1
+    }
+  }
   
+  # Build final data.table in one go
   data.table(
+    date = date,
+    series = series,
     lower = lower,
-    upper = upper,
-    series = factor(series_names),
-    date = rep(test_dates, each = n_series)
+    upper = upper
   )
 }
 
