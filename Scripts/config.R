@@ -1,37 +1,20 @@
-# =====================
-# SETUP SCRIPT
-# =====================
-
-# Clear environment
-rm(list = ls())
-
-# Load required packages
-if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")
-pacman::p_load(
-  ggplot2, tidyr, dplyr, data.table, zoo, factorstochvol, stringr,
-  IntroCompFinR, quadprog, tidyverse, bayestestR, gridExtra,
-  e1071, ParBayesianOptimization, tseries, mgcv, tikzDevice
+config <- list(
+  symbols = c("Brent", "Dubai", "Gasoline", "HO", "WTI"),
+  data_path = "Data/",
+  mcmc = list(q = 2, draws = 1e5, burnin = 5e4, thin = 1),
+  prediction = list(steps = 50, alpha = 0.05, smax = sqrt(qchisq(0.95, df = 5))),
+  weights = list(wc = 0.7, ws = 0.3),
+  search_space = list(
+    B_mu = c(1, 150),  
+    a_0 = c(1, 50),  
+    b_0 = c(1, 50),
+    B_sigma = c(0.01, 1),
+    a_i = c(0.1, 5),
+    c = c(0.1, 10),
+    d = c(0.1, 10)
+  )
 )
 
-# Set ggplot theme
-theme_set(theme_minimal() + 
-            theme(legend.position = 'bottom',
-                  plot.margin = margin(t = 0, r = 0, b = 0, l = 0)))
-
-# Set random seed
-set.seed(1)
-
-# Function to source multiple R scripts
-source_scripts <- function(paths) {
-  invisible(lapply(paths, source))
-}
-
-source_scripts(c(
-  "Scripts/config.R",
-  "Scripts/00-data-loading.R",
-  "Scripts/01-data-visualization.R",
-  "Scripts/02-mfsv.R",
-  "Scripts/03-bayesian-optimization.R",
-  "Scripts/04-save-results.R",
-  "Scripts/05-mfsv-visualization.R"
-))
+config$symbols_files <- paste0(config$data_path, config$symbols, ".csv")
+p <- length(config$search_space)
+m <- length(config$symbols)
