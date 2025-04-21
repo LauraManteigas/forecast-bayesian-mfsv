@@ -1,5 +1,5 @@
 # Bayesian-tuned MFSV forecasting
-This code accompanies the article "[insert article title here]".
+This code accompanies the article "Bayesian-Tuned Multivariate Factor Stochastic Volatility Model: Forecasting Amid Geopolitical Crisis".
 
 It integrates Bayesian optimization into a Multivariate Factor Stochastic Volatility (MFSV) model to improve 50-day-ahead forecasts for five energy futures:
 + Brent
