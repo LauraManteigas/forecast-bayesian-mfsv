@@ -11,8 +11,11 @@
 #' @param d NG prior rate
 #' @return An object of class `fsvdraws` containing posterior samples
 calculate_fsv_sample <- function(B_mu, a_0, b_0, B_sigma, a_i, c, d) {
+  train_dates <- data[stage=="train"]$date
+  train_data <- data[stage == "train", -c("stage", "date")]
+  
   fsvsample(
-    zoo(data[stage == "train", -c("stage", "date")], order.by = data$date),
+    zoo(train_data, order.by = train_dates),
     
     zeromean = TRUE,
     
